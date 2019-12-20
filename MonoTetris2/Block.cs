@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ namespace Game1
 {
     class Block
     {
-        
+
+        private bool _active = true;
         private Vector2 _vec = Vector2.Zero;
         private Texture2D sprite;
-        private int _count;
+        private int _count = 0;
         private float _countDuration = 1.0f;
         private float _currentTime;
+        private bool _keyHasBeenPressed = false;
 
         public Block(MonoTetris2.Game1 game)
         {
@@ -53,16 +56,37 @@ namespace Game1
 
         public void Update(GameTime gameTime, Rectangle windowBounds)
         {
-            _currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds; //Time passed since last Update() 
-            if (_currentTime > _countDuration)
+            if (!_active) return;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && !_keyHasBeenPressed)
             {
-                //_count++;
-                if (_vec.Y + sprite.Height < windowBounds.Bottom)
-                {
-                    Move(new Vector2(0f, sprite.Height));
-                }
-                _currentTime -= _countDuration;
+                Move(new Vector2(sprite.Width, 0));
+                _keyHasBeenPressed = true;
             }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && !_keyHasBeenPressed)
+            {
+                Move(new Vector2(-sprite.Width, 0));
+                _keyHasBeenPressed = true;
+            }
+
+            if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right))
+            {
+                _keyHasBeenPressed = false;
+            }
+                
+            _currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds; //Time passed since last Update() 
+            if (!(_currentTime > _countDuration)) return;
+            //_count++;
+            if (_vec.Y + sprite.Height < windowBounds.Bottom)
+            {
+                Move(new Vector2(0f, sprite.Height));
+            }
+            else
+            {
+                _count++;
+            }
+
+            _active = _count < 1;
+            _currentTime -= _countDuration;
         }
     }
 }
