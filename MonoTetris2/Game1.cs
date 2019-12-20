@@ -1,4 +1,5 @@
-﻿using Game1;
+﻿using System.Collections.Generic;
+using Game1;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,12 +12,16 @@ namespace MonoTetris2
         Rectangle windowBounds;
         SpriteBatch spriteBatch;
         Block block;
+        List<Block> grid = new List<Block>();
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferHeight = 48 * 14;
+            graphics.PreferredBackBufferWidth = 48 * 7;
         }
 
         protected override void Initialize()
@@ -41,7 +46,15 @@ namespace MonoTetris2
                 Exit();
 
             // TODO: Add your update logic here
-            block.Update(gameTime, windowBounds);
+            if (block.IsActive())
+            {
+                block.Update(gameTime, windowBounds);
+            }
+            else
+            {
+                grid.Add(block);
+                block = new Block(this);
+            }
 
             base.Update(gameTime);
         }
@@ -52,6 +65,10 @@ namespace MonoTetris2
 
             // TODO: Add your drawing code here
             block.Draw(gameTime, spriteBatch);
+            foreach (Block ele in grid)
+            {
+                ele.Draw(gameTime, spriteBatch);
+            }
 
             base.Draw(gameTime);
         }
