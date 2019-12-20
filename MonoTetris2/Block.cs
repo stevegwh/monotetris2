@@ -14,123 +14,25 @@ namespace Game1
 
         private bool _active = true;
         private Vector2 _vec = Vector2.Zero;
-        private Texture2D sprite;
         private int _count = 0;
         private const float CountDuration = 1.0f;
         private float _countDuration = CountDuration;
         private float _currentTime;
         private bool _keyHasBeenPressed = false;
 
+        private Texture2D sprite;
         private List<List<Vector2>> _currentBlock;
-        private List<List<List<Vector2>>> _blocks;
         private int _currentBlockIdx;
         
 
-        public Block(MonoTetris2.Game1 game)
+        public Block(Texture2D sprite, List<List<Vector2>> currentBlock)
         {
-            List<List<Vector2>> lineBlock = new List<List<Vector2>>();
-            List<List<Vector2>> tBlock = new List<List<Vector2>>();
-            List<List<Vector2>> sBlockR = new List<List<Vector2>>();
-            List<List<Vector2>> sBlockL = new List<List<Vector2>>();
-            List<List<Vector2>> squareBlock = new List<List<Vector2>>();
-            sprite = game.Content.Load<Texture2D>("block");
+            this.sprite = sprite;
             _count = 0;
             _currentBlockIdx = 0;
-            
-            lineBlock.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 2), 
-                new Vector2(sprite.Width * 1, sprite.Height * 3) 
-            });
-            
-            lineBlock.Add(new List<Vector2> {
-                new Vector2(0, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 2, sprite.Height * 1), 
-                new Vector2(sprite.Width * 3, sprite.Height * 1) 
-            });
-            
-            tBlock.Add(new List<Vector2> {
-                new Vector2(0, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 2) 
-            });
-            
-            tBlock.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 1, 0),
-                new Vector2(0, sprite.Height * 1),
-                new Vector2(sprite.Width * 1, sprite.Height * 1),
-                new Vector2(sprite.Width * 2, sprite.Height * 1)
-            });
-            
-            tBlock.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 2, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 2) 
-            });
-            
-            tBlock.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 1, sprite.Height * 2),
-                new Vector2(0, sprite.Height * 1),
-                new Vector2(sprite.Width * 1, sprite.Height * 1),
-                new Vector2(sprite.Width * 2, sprite.Height * 1)
-            });
-            
-            squareBlock.Add(new List<Vector2> {
-                new Vector2(0, 0), 
-                new Vector2(0, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1) 
-            });
-            
-            sBlockR.Add(new List<Vector2> {
-                new Vector2(0, sprite.Height * 2), 
-                new Vector2(0, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1) 
-            });
-            
-            sBlockR.Add(new List<Vector2> {
-                new Vector2(0, 0), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 2, sprite.Height * 1) 
-            });
-            
-            sBlockL.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 2, 0), 
-                new Vector2(sprite.Width * 1, 0), 
-                new Vector2(0, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 1) 
-            });
-            
-            sBlockL.Add(new List<Vector2> {
-                new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                new Vector2(sprite.Width * 1, sprite.Height * 2), 
-                new Vector2(0, 0), 
-                new Vector2(0, sprite.Height * 1) 
-            });
-
-            /*
-            _blocks.Add(squareBlock);
-            _blocks.Add(lineBlock);
-            _blocks.Add(tBlock);
-            _blocks.Add(sBlockL);
-            _blocks.Add(sBlockR);
-            */
-
-            _currentBlock = sBlockL;
+            _currentBlock = currentBlock;
         }
 
-        private List<List<Vector2>> GetRandomBlock()
-        {
-            Random random = new Random();  
-            int num = random.Next(_blocks.Count);
-            return _blocks[num];
-        }
 
         // Updates all blocks with the new position
         public void Move(Vector2 toMove)
