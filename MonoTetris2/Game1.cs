@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ namespace MonoTetris2
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Block block;
 
         public Game1()
         {
@@ -27,6 +29,9 @@ namespace MonoTetris2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            Texture2D t = this.Content.Load<Texture2D>("block");
+            block = new Block(t);
             // TODO: use this.Content to load your game content here
         }
 
@@ -46,6 +51,9 @@ namespace MonoTetris2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(block.getSprite(), position: Vector2.Zero);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
