@@ -8,6 +8,7 @@ namespace MonoTetris2
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+        Rectangle windowBounds;
         SpriteBatch spriteBatch;
         Block block;
 
@@ -21,6 +22,7 @@ namespace MonoTetris2
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            windowBounds = graphics.GraphicsDevice.Viewport.Bounds;
 
             base.Initialize();
         }
@@ -28,10 +30,7 @@ namespace MonoTetris2
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            Texture2D t = this.Content.Load<Texture2D>("block");
-            block = new Block(t);
+            block = new Block(this);
             // TODO: use this.Content to load your game content here
         }
 
@@ -42,6 +41,7 @@ namespace MonoTetris2
                 Exit();
 
             // TODO: Add your update logic here
+            block.Update(gameTime, windowBounds);
 
             base.Update(gameTime);
         }
@@ -51,9 +51,7 @@ namespace MonoTetris2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.Draw(block.getSprite(), position: Vector2.Zero);
-            spriteBatch.End();
+            block.Draw(gameTime, spriteBatch);
 
             base.Draw(gameTime);
         }
