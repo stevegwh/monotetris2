@@ -45,7 +45,7 @@ namespace Game1
             if (toCheck.X >= windowBounds.Right || toCheck.X < windowBounds.Left 
                                                 || toCheck.Y + sprite.Height > windowBounds.Bottom)
                 return false;
-            foreach (List<Block> list in MonoTetris2.Game1.grid.Values)
+            foreach (List<Block> list in MonoTetris2.Game1.grid)
             {
                 foreach (Block blk in list)
                 {

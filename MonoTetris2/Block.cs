@@ -6,13 +6,19 @@ namespace MonoTetris2
     public struct Block
     {
         private Texture2D _sprite;
-        private Vector2 _pos;
+        public Vector2 _pos;
         private SpriteBatch _spriteBatch;
 
         public Vector2 GetPos()
         {
             return _pos;
         }
+
+        public void UpdatePos(Vector2 toMove)
+        {
+            _pos += toMove;
+        }
+        
             
         public void Draw()
         {

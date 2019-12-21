@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game1;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +18,7 @@ namespace MonoTetris2
         private List<List<List<Vector2>>> _blockData = new List<List<List<Vector2>>>();
         private BlockController _blockController;
         //static public List<Block> grid = new List<Block>();
-        static public Dictionary<float, List<Block>> grid = new Dictionary<float, List<Block>>();
+        static public List<List<Block>> grid = new List<List<Block>>();
 
         public Game1()
         {
@@ -157,13 +158,28 @@ namespace MonoTetris2
         {
             for (int i = 0; i < windowBounds.Bottom/sprite.Height; i++)
             {
-                grid[sprite.Height * i] = new List<Block>();
+                grid.Add(new List<Block>());
             }
         }
 
         private void ClearLines()
         {
-            
+            List<int> toRemove = new List<int>();
+            foreach (List<Block> list in grid)
+            {
+                // Console.WriteLine(grid[key].Count == windowBounds.Right / sprite.Width);
+                if (list.Count == windowBounds.Right / sprite.Width)
+                {
+                    toRemove.Add(grid.IndexOf(list));
+                }
+            }
+
+            foreach (int idx in toRemove)
+            {
+                grid.Remove(grid[idx]);
+                grid.Insert(0, new List<Block>());
+            }
+            // Update Y position of every block
         }
 
         protected override void Update(GameTime gameTime)
@@ -181,10 +197,10 @@ namespace MonoTetris2
                 // Add all blocks to the grid
                 foreach (Vector2 pos in _blockController.GetPos())
                 {
-                    grid[pos.X].Add(new Block(pos: pos, sprite: sprite, spriteBatch: spriteBatch));
+                    int idx = (int) (pos.Y / sprite.Height);
+                    grid[idx].Add(new Block(pos: pos, sprite: sprite, spriteBatch: spriteBatch));
                 }
-                //grid.Add(block);
-                sprite = this.Content.Load<Texture2D>("block");
+                ClearLines();
                 _blockController = new BlockController(sprite, GetRandomBlock());
             }
 
@@ -197,7 +213,7 @@ namespace MonoTetris2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _blockController.Draw(gameTime, spriteBatch);
-            foreach (List<Block> ele in grid.Values)
+            foreach (List<Block> ele in grid)
             {
                 foreach (Block blk in ele)
                 {
