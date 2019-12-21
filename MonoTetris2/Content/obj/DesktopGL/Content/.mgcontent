@@ -4,6 +4,6 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/block.png</File>
+    <File>C:/Users/Steve/RiderProjects/monotetris2/MonoTetris2/Content/block.png</File>
   </SourceFiles>
 </SourceFileCollection>

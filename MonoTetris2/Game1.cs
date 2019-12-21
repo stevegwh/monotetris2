@@ -14,9 +14,10 @@ namespace MonoTetris2
         Rectangle windowBounds;
         SpriteBatch spriteBatch;
         private Texture2D sprite;
-        private List<List<List<Vector2>>> _blocks = new List<List<List<Vector2>>>();
-        private Block block;
-        static public List<Block> grid = new List<Block>();
+        private List<List<List<Vector2>>> _blockData = new List<List<List<Vector2>>>();
+        private BlockController _blockController;
+        //static public List<Block> grid = new List<Block>();
+        static public Dictionary<float, List<Block>> grid = new Dictionary<float, List<Block>>();
 
         public Game1()
         {
@@ -31,6 +32,7 @@ namespace MonoTetris2
         protected override void Initialize()
         {
             windowBounds = graphics.GraphicsDevice.Viewport.Bounds;
+            
 
             base.Initialize();
         }
@@ -41,7 +43,7 @@ namespace MonoTetris2
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprite = this.Content.Load<Texture2D>("block");
             // Line block
-            _blocks.Add(new List<List<Vector2>> { 
+            _blockData.Add(new List<List<Vector2>> { 
                 new List<Vector2> {
                     new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1), 
@@ -57,7 +59,7 @@ namespace MonoTetris2
             });
             
             //tblock
-            _blocks.Add(new List<List<Vector2>> { 
+            _blockData.Add(new List<List<Vector2>> { 
                 new List<Vector2> {
                     new Vector2(0, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, 0), 
@@ -85,7 +87,7 @@ namespace MonoTetris2
             });
             
             // Square block
-            _blocks.Add(new List<List<Vector2>> { 
+            _blockData.Add(new List<List<Vector2>> { 
                 new List<Vector2> {
                     new Vector2(0, 0), 
                     new Vector2(0, sprite.Height * 1), 
@@ -95,7 +97,7 @@ namespace MonoTetris2
             });
             
             // sBlockR
-            _blocks.Add(new List<List<Vector2>> { 
+            _blockData.Add(new List<List<Vector2>> { 
                 new List<Vector2> {
                     new Vector2(0, sprite.Height * 2), 
                     new Vector2(0, sprite.Height * 1), 
@@ -111,7 +113,7 @@ namespace MonoTetris2
             });
 
             // sBlockL
-            _blocks.Add(new List<List<Vector2>>
+            _blockData.Add(new List<List<Vector2>>
             {
                 new List<Vector2>
                 {
@@ -128,18 +130,18 @@ namespace MonoTetris2
                     new Vector2(0, sprite.Height * 1)
                 }
             });
-
-            block = new Block(sprite, GetRandomBlock());
+            _blockController = new BlockController(sprite, GetRandomBlock());
+            InitGrid();
         }
         
         // Must return by value
         private List<List<Vector2>> GetRandomBlock()
         {
             Random random = new Random();  
-            int num = random.Next(_blocks.Count);
+            int num = random.Next(_blockData.Count);
             List<List<Vector2>> newList = new List<List<Vector2>>();
             // Make deep copy
-            foreach (List<Vector2> list in _blocks[num])
+            foreach (List<Vector2> list in _blockData[num])
             {
                 List<Vector2> copy = new List<Vector2>();
                 foreach (Vector2 vec in list)
@@ -151,12 +153,16 @@ namespace MonoTetris2
             return newList;
         }
 
+        private void InitGrid()
+        {
+            for (int i = 0; i < windowBounds.Bottom/sprite.Height; i++)
+            {
+                grid[sprite.Height * i] = new List<Block>();
+            }
+        }
+
         private void ClearLines()
         {
-            foreach (Block blk in grid)
-            {
-                
-            }
             
         }
 
@@ -166,15 +172,20 @@ namespace MonoTetris2
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (block.IsActive())
+            if (_blockController.IsActive())
             {
-                block.Update(gameTime, windowBounds);
+                _blockController.Update(gameTime, windowBounds);
             }
             else
             {
-                grid.Add(block);
+                // Add all blocks to the grid
+                foreach (Vector2 pos in _blockController.GetPos())
+                {
+                    grid[pos.X].Add(new Block(pos: pos, sprite: sprite, spriteBatch: spriteBatch));
+                }
+                //grid.Add(block);
                 sprite = this.Content.Load<Texture2D>("block");
-                block = new Block(sprite, GetRandomBlock());
+                _blockController = new BlockController(sprite, GetRandomBlock());
             }
 
             base.Update(gameTime);
@@ -185,10 +196,13 @@ namespace MonoTetris2
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            block.Draw(gameTime, spriteBatch);
-            foreach (Block ele in grid)
+            _blockController.Draw(gameTime, spriteBatch);
+            foreach (List<Block> ele in grid.Values)
             {
-                ele.Draw(gameTime, spriteBatch);
+                foreach (Block blk in ele)
+                {
+                    blk.Draw();
+                }
             }
 
             base.Draw(gameTime);
