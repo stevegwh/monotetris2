@@ -176,10 +176,14 @@ namespace MonoTetris2
 
             foreach (int idx in toRemove)
             {
-                grid.Remove(grid[idx]);
+                grid.RemoveAt(idx);
                 grid.Insert(0, new List<Block>());
             }
+            
             // Update Y position of every block
+            grid.ForEach(e=> e.ForEach(f=> f.UpdatePos( new Vector2(f.GetPos().X,
+                grid.IndexOf(e) * sprite.Height))));
+
         }
 
         protected override void Update(GameTime gameTime)

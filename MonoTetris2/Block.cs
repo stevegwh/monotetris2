@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoTetris2
 {
-    public struct Block
+    public class Block
     {
         private Texture2D _sprite;
-        public Vector2 _pos;
+        private Vector2 _pos;
         private SpriteBatch _spriteBatch;
 
         public Vector2 GetPos()
@@ -14,12 +14,10 @@ namespace MonoTetris2
             return _pos;
         }
 
-        public void UpdatePos(Vector2 toMove)
+        public void UpdatePos(Vector2 newLocation)
         {
-            _pos += toMove;
+            _pos = newLocation;
         }
-        
-            
         public void Draw()
         {
             _spriteBatch.Begin();
@@ -30,7 +28,7 @@ namespace MonoTetris2
         public Block(Texture2D sprite, Vector2 pos, SpriteBatch spriteBatch)
         {
             _sprite = sprite;
-            _pos = pos;
+            _pos = new Vector2(pos.X, pos.Y);
             _spriteBatch = spriteBatch;
         }
     }
