@@ -15,8 +15,8 @@ namespace MonoTetris2
         SpriteBatch spriteBatch;
         private Texture2D sprite;
         private List<List<List<Vector2>>> _blocks = new List<List<List<Vector2>>>();
-        Block block;
-        List<Block> grid = new List<Block>();
+        private Block block;
+        static public List<Block> grid = new List<Block>();
 
         public Game1()
         {
@@ -30,7 +30,6 @@ namespace MonoTetris2
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             windowBounds = graphics.GraphicsDevice.Viewport.Bounds;
 
             base.Initialize();
@@ -152,13 +151,21 @@ namespace MonoTetris2
             return newList;
         }
 
+        private void ClearLines()
+        {
+            foreach (Block blk in grid)
+            {
+                
+            }
+            
+        }
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
             if (block.IsActive())
             {
                 block.Update(gameTime, windowBounds);
@@ -173,11 +180,11 @@ namespace MonoTetris2
             base.Update(gameTime);
         }
 
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             block.Draw(gameTime, spriteBatch);
             foreach (Block ele in grid)
             {
