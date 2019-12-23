@@ -782,24 +782,26 @@
     ]
   },
   "packageFolders": {
-    "/home/forest/.nuget/packages/": {}
+    "C:\\Users\\Steve\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/forest/RiderProjects/MonoTetris2/MonoTetris2/MonoTetris2.csproj",
+      "projectUniqueName": "C:\\Users\\Steve\\RiderProjects\\monotetris2\\MonoTetris2\\MonoTetris2.csproj",
       "projectName": "MonoTetris2",
-      "projectPath": "/home/forest/RiderProjects/MonoTetris2/MonoTetris2/MonoTetris2.csproj",
-      "packagesPath": "/home/forest/.nuget/packages/",
-      "outputPath": "/home/forest/RiderProjects/MonoTetris2/MonoTetris2/obj/",
+      "projectPath": "C:\\Users\\Steve\\RiderProjects\\monotetris2\\MonoTetris2\\MonoTetris2.csproj",
+      "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Steve\\RiderProjects\\monotetris2\\MonoTetris2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/forest/.config/NuGet/NuGet.Config"
+        "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -841,7 +843,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/opt/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

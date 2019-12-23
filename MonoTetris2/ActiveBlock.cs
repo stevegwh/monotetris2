@@ -28,56 +28,22 @@ namespace MonoTetris2
             return _origin;
         }
 
-        
         // Returns the block after it has been rotated. BlockController will check if this is a valid move
         // and if so it will then call "SetPos"
         public List<Vector2> Rotate()
         {
-            // TODO: Straight line rotation is off
+            // -1 is a flag to not rotate, square uses this.
             if (_origin == -1) return _positions;
             List<Vector2> normalizedPositions = Normalize();
             Vector2 center = normalizedPositions[_origin];
-            // Remove rotation point
-            //normalizedPositions.RemoveAt(_origin);
-            /*
-            Vector2 center = (normalizedPositions[0] + normalizedPositions[1] + normalizedPositions[2] + normalizedPositions[3] )/4;
-            center.X = (float)Math.Round(center.X);
-            center.Y = (float)Math.Round(center.Y);
-            */
             List<Vector2> toReturn = new List<Vector2>();
             foreach (Vector2 normalizedPosition in normalizedPositions)
             {
-                // Do not bother rotating the pivot point
-                if (normalizedPosition == center)
-                {
-                    toReturn.Add(_positions[_origin]);
-                    continue;
-                }
+                float x2 = (normalizedPosition.Y + center.X - center.Y);
+                float y2 = (center.X + center.Y - normalizedPosition.X);
                 
-                Vector2 transformed = new Vector2();
-
-                double angle = -45;
-                double vertical = -Math.Tan(angle * 0.5f);
-            
-                // First shear.
-                transformed.Y = (float)Math.Round(normalizedPosition.Y + vertical * (normalizedPosition.X - center.X));
-            
-                // Second shear.
-                transformed.X = (float)Math.Round(normalizedPosition.X + Math.Sin(angle) * (transformed.Y - center.Y));
-            
-                // Third shear
-                transformed.Y = (float)Math.Round(transformed.Y + vertical * (transformed.X - center.X));
-            
-                // Denormallize
-                toReturn.Add(new Vector2(transformed.X * _sprite.Width, transformed.Y * _sprite.Height));
+                toReturn.Add(new Vector2(x2 * _sprite.Width, y2 * _sprite.Height));
             }
-
-            // Add center back in and de-normalize it
-            /*
-            toReturn.Insert(_origin,
-                new Vector2(center.X * _sprite.Width, center.Y * _sprite.Height));
-                */
-            
             return toReturn;
         }
 

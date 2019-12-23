@@ -119,14 +119,12 @@ namespace MonoTetris2
             );
             
             _blockData.Add(lineBlock);
-            /*
             _blockData.Add(pBlock);
             _blockData.Add(sevenBlock);
             _blockData.Add(tBlock);
             _blockData.Add(squareBlock);
             _blockData.Add(sBlockL);
             _blockData.Add(sBlockR);
-            */
 
             _blockController = new BlockController(sprite, GetRandomBlock());
             InitGrid();
