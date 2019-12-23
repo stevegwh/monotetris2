@@ -15,7 +15,7 @@ namespace MonoTetris2
         Rectangle windowBounds;
         SpriteBatch spriteBatch;
         private Texture2D sprite;
-        private List<List<List<Vector2>>> _blockData = new List<List<List<Vector2>>>();
+        private List<ActiveBlock> _blockData = new List<ActiveBlock>();
         private BlockController _blockController;
         //static public List<Block> grid = new List<Block>();
         static public List<List<Block>> grid = new List<List<Block>>();
@@ -33,8 +33,6 @@ namespace MonoTetris2
         protected override void Initialize()
         {
             windowBounds = graphics.GraphicsDevice.Viewport.Bounds;
-            
-
             base.Initialize();
         }
         
@@ -43,115 +41,107 @@ namespace MonoTetris2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprite = this.Content.Load<Texture2D>("block");
-            // Line block
-            _blockData.Add(new List<List<Vector2>> { 
+            ActiveBlock lineBlock = new ActiveBlock(
                 new List<Vector2> {
                     new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, sprite.Height * 2), 
                     new Vector2(sprite.Width * 1, sprite.Height * 3) 
                 },
-                new List<Vector2> {
-                    new Vector2(0, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 2, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 3, sprite.Height * 1) 
-                }
-            });
+                2,
+                sprite
+            );
             
-            //tblock
-            _blockData.Add(new List<List<Vector2>> { 
+            ActiveBlock pBlock = new ActiveBlock(
+                new List<Vector2> {
+                    new Vector2(sprite.Width * 1, 0), 
+                    new Vector2(sprite.Width * 2, 0) ,
+                    new Vector2(sprite.Width * 1, sprite.Height * 1), 
+                    new Vector2(sprite.Width * 1, sprite.Height * 2), 
+                },
+                2,
+                sprite
+            );
+            
+            ActiveBlock sevenBlock = new ActiveBlock(
+                new List<Vector2> {
+                    new Vector2(sprite.Width * 1, 0), 
+                    new Vector2(0, 0) ,
+                    new Vector2(sprite.Width * 1, sprite.Height * 1), 
+                    new Vector2(sprite.Width * 1, sprite.Height * 2), 
+                },
+                2,
+                sprite
+            );
+            
+            ActiveBlock tBlock = new ActiveBlock(
                 new List<Vector2> {
                     new Vector2(0, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 1, sprite.Height * 2) 
+                    new Vector2(sprite.Width * 1, sprite.Height * 2) ,
                 },
-                 new List<Vector2> {
-                    new Vector2(sprite.Width * 1, 0),
-                    new Vector2(0, sprite.Height * 1),
-                    new Vector2(sprite.Width * 1, sprite.Height * 1),
-                    new Vector2(sprite.Width * 2, sprite.Height * 1)
-                },
-                new List<Vector2> {
-                    new Vector2(sprite.Width * 2, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 1, 0), 
-                    new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 1, sprite.Height * 2) 
-                },
-                new List<Vector2> {
-                    new Vector2(sprite.Width * 1, sprite.Height * 2),
-                    new Vector2(0, sprite.Height * 1),
-                    new Vector2(sprite.Width * 1, sprite.Height * 1),
-                    new Vector2(sprite.Width * 2, sprite.Height * 1)
-                }
-            });
-            
-            // Square block
-            _blockData.Add(new List<List<Vector2>> { 
+                2,
+                sprite
+            );
+
+            ActiveBlock squareBlock = new ActiveBlock(
                 new List<Vector2> {
                     new Vector2(0, 0), 
                     new Vector2(0, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1) 
-                }
-            });
+                },
+                -1,
+                sprite
+            );
             
-            // sBlockR
-            _blockData.Add(new List<List<Vector2>> { 
+            ActiveBlock sBlockR = new ActiveBlock(
                 new List<Vector2> {
                     new Vector2(0, sprite.Height * 2), 
                     new Vector2(0, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1) 
                 },
-                new List<Vector2> {
-                    new Vector2(0, 0), 
-                    new Vector2(sprite.Width * 1, 0), 
-                    new Vector2(sprite.Width * 1, sprite.Height * 1), 
-                    new Vector2(sprite.Width * 2, sprite.Height * 1) 
-                }
-            });
+                1,
+                sprite
+            );
 
-            // sBlockL
-            _blockData.Add(new List<List<Vector2>>
-            {
-                new List<Vector2>
-                {
+            ActiveBlock sBlockL = new ActiveBlock(
+                new List<Vector2> {
                     new Vector2(sprite.Width * 2, 0),
                     new Vector2(sprite.Width * 1, 0),
                     new Vector2(0, sprite.Height * 1),
                     new Vector2(sprite.Width * 1, sprite.Height * 1)
                 },
-                new List<Vector2>
-                {
-                    new Vector2(sprite.Width * 1, sprite.Height * 1),
-                    new Vector2(sprite.Width * 1, sprite.Height * 2),
-                    new Vector2(0, 0),
-                    new Vector2(0, sprite.Height * 1)
-                }
-            });
+                1,
+                sprite
+            );
+            
+            _blockData.Add(lineBlock);
+            /*
+            _blockData.Add(pBlock);
+            _blockData.Add(sevenBlock);
+            _blockData.Add(tBlock);
+            _blockData.Add(squareBlock);
+            _blockData.Add(sBlockL);
+            _blockData.Add(sBlockR);
+            */
+
             _blockController = new BlockController(sprite, GetRandomBlock());
             InitGrid();
         }
         
         // Must return by value
-        private List<List<Vector2>> GetRandomBlock()
+        private ActiveBlock GetRandomBlock()
         {
             Random random = new Random();  
             int num = random.Next(_blockData.Count);
-            List<List<Vector2>> newList = new List<List<Vector2>>();
-            // Make deep copy
-            foreach (List<Vector2> list in _blockData[num])
-            {
-                List<Vector2> copy = new List<Vector2>();
-                foreach (Vector2 vec in list)
-                {
-                    copy.Add(new Vector2(vec.X, vec.Y));
-                }
-                newList.Add(copy);
-            }
-            return newList;
+            ActiveBlock randomBlock = _blockData[num];
+            int orig = randomBlock.GetOrig();
+            List<Vector2> positions = new List<Vector2>(randomBlock.GetPos());
+            ActiveBlock newBlock = new ActiveBlock(positions, orig, randomBlock.GetSprite());
+            return newBlock;
         }
 
         private void InitGrid()
@@ -216,7 +206,7 @@ namespace MonoTetris2
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _blockController.Draw(gameTime, spriteBatch);
+            _blockController.Draw(spriteBatch, sprite);
             foreach (List<Block> ele in grid)
             {
                 foreach (Block blk in ele)

@@ -21,12 +21,12 @@ namespace Game1
         private bool _keyHasBeenPressed = false;
 
         private Texture2D sprite;
-        private List<List<Vector2>> _currentBlockPattern;
+        private ActiveBlock _currentBlockPattern;
         private int _currentBlockPatternIdx;
         
 
         // There needs to be a singular static grid to check things on.
-        public BlockController(Texture2D sprite, List<List<Vector2>> currentBlockPattern)
+        public BlockController(Texture2D sprite, ActiveBlock currentBlockPattern)
         {
             //_grid = grid;
             this.sprite = sprite;
@@ -37,7 +37,7 @@ namespace Game1
 
         public List<Vector2> GetPos()
         {
-            return _currentBlockPattern[_currentBlockPatternIdx];
+            return _currentBlockPattern.GetPos();
         }
 
         private bool IsValidMove(Vector2 toCheck, Rectangle windowBounds)
@@ -61,7 +61,7 @@ namespace Game1
         // Updates all blocks with the new position
         public void Move(Vector2 toMove, Rectangle windowBounds)
         {
-            foreach (var ele in _currentBlockPattern[_currentBlockPatternIdx])
+            foreach (var ele in _currentBlockPattern.GetPos())
             {
                 if (!IsValidMove(ele + toMove, windowBounds))
                 {
@@ -70,24 +70,16 @@ namespace Game1
                 }
             }
             _count = 0;
-            foreach (var ele in _currentBlockPattern)
+            for(int i = 0; i < _currentBlockPattern.GetPos().Count; i++)
             {
-                for(int i=0;i<ele.Count;i++)
-                {
-                    ele[i] += toMove;
-                }
+                _currentBlockPattern.GetPos()[i] += toMove;
             }
         }
         // Draws the active block
         // Could replace this by having the _blockData store Blocks not Vector2
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Texture2D sprite)
         {
-            spriteBatch.Begin();
-            foreach (var ele in _currentBlockPattern[_currentBlockPatternIdx])
-            {
-                spriteBatch.Draw(sprite, ele);
-            }
-            spriteBatch.End();
+            _currentBlockPattern.Draw(spriteBatch, sprite);
         }
         public void Update(GameTime gameTime, Rectangle windowBounds)
         {
@@ -106,13 +98,12 @@ namespace Game1
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Up) && !_keyHasBeenPressed)
             {
-                int toMoveIdx = (_currentBlockPatternIdx + 1) % _currentBlockPattern.Count;
-                foreach (var ele in _currentBlockPattern[toMoveIdx])
+                List<Vector2> rotations = _currentBlockPattern.Rotate();
+                foreach (Vector2 rotation in rotations)
                 {
-                    if (!IsValidMove(ele,  windowBounds)) return;
+                    if (!IsValidMove(rotation,  windowBounds)) return;
                 }
-
-                _currentBlockPatternIdx = toMoveIdx;
+                _currentBlockPattern.SetPos(rotations);
                 _keyHasBeenPressed = true;
             }
 
