@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
@@ -12,6 +13,7 @@ namespace MonoTetris2
         // The index of the point of origin in the array
         private int _origin;
         private Texture2D _sprite;
+        private Color _color;
 
         public List<Vector2> GetPos()
         {
@@ -21,6 +23,11 @@ namespace MonoTetris2
         public Texture2D GetSprite()
         {
             return _sprite;
+        }
+        
+        public Color GetColor()
+        {
+            return _color;
         }
 
         public int GetOrig()
@@ -69,16 +76,17 @@ namespace MonoTetris2
             spriteBatch.Begin();
             foreach (Vector2 vec in _positions)
             {
-                spriteBatch.Draw(sprite, vec);
+                spriteBatch.Draw(sprite, vec, _color);
             }
             spriteBatch.End();
         }
 
-        public ActiveBlock(List<Vector2> positions, int origin, Texture2D sprite)
+        public ActiveBlock(List<Vector2> positions, int origin, Texture2D sprite, Color color)
         {
             _origin = origin;
             _positions = positions;
             _sprite = sprite;
+            _color = color;
         }
     }
 }

@@ -6,7 +6,6 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="MonoTetris2" t="IncludeRecursive">
         <e p="ActiveBlock.cs" t="Include" />
-        <e p="Block.cs" t="Include" />
         <e p="BlockController.cs" t="Include" />
         <e p="Content" t="Include">
           <e p="Content.mgcb" t="Include" />
@@ -15,19 +14,24 @@
               <e p="Content" t="Include">
                 <e p="block.xnb" t="Include" />
               </e>
+              <e p="block.xnb" t="Include" />
             </e>
           </e>
           <e p="block.png" t="Include" />
           <e p="obj" t="Include">
             <e p="DesktopGL" t="Include">
+              <e p=".mgcontent" t="Include" />
+              <e p=".mgstats" t="Include" />
               <e p="Content" t="Include">
                 <e p=".mgcontent" t="Include" />
                 <e p="block.mgcontent" t="Include" />
               </e>
+              <e p="block.mgcontent" t="Include" />
             </e>
           </e>
         </e>
         <e p="Game1.cs" t="Include" />
+        <e p="GridBlock.cs" t="Include" />
         <e p="MonoTetris2.csproj" t="IncludeRecursive" />
         <e p="Program.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />

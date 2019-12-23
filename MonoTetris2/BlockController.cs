@@ -22,8 +22,6 @@ namespace Game1
 
         private Texture2D sprite;
         private ActiveBlock _currentBlockPattern;
-        private int _currentBlockPatternIdx;
-        
 
         // There needs to be a singular static grid to check things on.
         public BlockController(Texture2D sprite, ActiveBlock currentBlockPattern)
@@ -31,13 +29,24 @@ namespace Game1
             //_grid = grid;
             this.sprite = sprite;
             _count = 0;
-            _currentBlockPatternIdx = 0;
             _currentBlockPattern = currentBlockPattern;
+        }
+        
+        public void SetNewBlock(ActiveBlock newBlock)
+        {
+            _currentBlockPattern = newBlock;
+            _count = 0;
+            _active = true;
         }
 
         public List<Vector2> GetPos()
         {
             return _currentBlockPattern.GetPos();
+        }
+        
+        public Color GetColor()
+        {
+            return _currentBlockPattern.GetColor();
         }
 
         private bool IsValidMove(Vector2 toCheck, Rectangle windowBounds)
@@ -83,7 +92,7 @@ namespace Game1
         }
         public void Update(GameTime gameTime, Rectangle windowBounds)
         {
-            _countDuration = Keyboard.GetState().IsKeyDown(Keys.Down) ? CountDuration / 4 : CountDuration;
+            _countDuration = Keyboard.GetState().IsKeyDown(Keys.Down) ? CountDuration / 6 : CountDuration;
             
                 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && !_keyHasBeenPressed)
@@ -99,12 +108,38 @@ namespace Game1
             else if (Keyboard.GetState().IsKeyDown(Keys.Up) && !_keyHasBeenPressed)
             {
                 List<Vector2> rotations = _currentBlockPattern.Rotate();
-                foreach (Vector2 rotation in rotations)
+                List<Vector2> kickbacks = new List<Vector2>
                 {
-                    if (!IsValidMove(rotation,  windowBounds)) return;
+                    new Vector2(0, 0),
+                    new Vector2(0, -sprite.Height),
+                    new Vector2(sprite.Width, 0),
+                    new Vector2(-sprite.Width, 0),
+                    new Vector2(sprite.Width * 2, 0),
+                    new Vector2(-sprite.Width * 2, 0)
+                };
+
+                foreach (Vector2 kickback in kickbacks)
+                {
+                    List<Vector2> validRotation = new List<Vector2>();
+                    foreach (Vector2 rotation in rotations)
+                    {
+                        if (IsValidMove(rotation + kickback, windowBounds))
+                        {
+                            validRotation.Add(rotation + kickback);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (validRotation.Count == 4)
+                    {
+                        _currentBlockPattern.SetPos(validRotation);
+                        _keyHasBeenPressed = true;
+                        return;
+                    }
                 }
-                _currentBlockPattern.SetPos(rotations);
-                _keyHasBeenPressed = true;
             }
 
             if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right) && Keyboard.GetState().IsKeyUp(Keys.Up))

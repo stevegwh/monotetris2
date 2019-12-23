@@ -26,8 +26,8 @@ namespace MonoTetris2
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferHeight = 48 * 14;
-            graphics.PreferredBackBufferWidth = 48 * 7;
+            graphics.PreferredBackBufferHeight = 48 * 20;
+            graphics.PreferredBackBufferWidth = 48 * 10;
         }
 
         protected override void Initialize()
@@ -49,29 +49,32 @@ namespace MonoTetris2
                     new Vector2(sprite.Width * 1, sprite.Height * 3) 
                 },
                 2,
-                sprite
+                sprite,
+                new Color(Color.Cyan, 1.0f)
             );
             
             ActiveBlock pBlock = new ActiveBlock(
                 new List<Vector2> {
-                    new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 2, 0) ,
+                    new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, sprite.Height * 2), 
                 },
                 2,
-                sprite
+                sprite,
+                new Color(Color.Blue, 1.0f)
             );
             
             ActiveBlock sevenBlock = new ActiveBlock(
                 new List<Vector2> {
-                    new Vector2(sprite.Width * 1, 0), 
                     new Vector2(0, 0) ,
+                    new Vector2(sprite.Width * 1, 0), 
                     new Vector2(sprite.Width * 1, sprite.Height * 1), 
                     new Vector2(sprite.Width * 1, sprite.Height * 2), 
                 },
                 2,
-                sprite
+                sprite,
+                new Color(Color.Orange, 1.0f)
             );
             
             ActiveBlock tBlock = new ActiveBlock(
@@ -82,7 +85,8 @@ namespace MonoTetris2
                     new Vector2(sprite.Width * 1, sprite.Height * 2) ,
                 },
                 2,
-                sprite
+                sprite,
+                new Color(Color.Purple, 1.0f)
             );
 
             ActiveBlock squareBlock = new ActiveBlock(
@@ -93,7 +97,8 @@ namespace MonoTetris2
                     new Vector2(sprite.Width * 1, sprite.Height * 1) 
                 },
                 -1,
-                sprite
+                sprite,
+                new Color(Color.Yellow, 1.0f)
             );
             
             ActiveBlock sBlockR = new ActiveBlock(
@@ -104,7 +109,8 @@ namespace MonoTetris2
                     new Vector2(sprite.Width * 1, sprite.Height * 1) 
                 },
                 1,
-                sprite
+                sprite,
+                new Color(Color.Lime, 1.0f)
             );
 
             ActiveBlock sBlockL = new ActiveBlock(
@@ -115,7 +121,8 @@ namespace MonoTetris2
                     new Vector2(sprite.Width * 1, sprite.Height * 1)
                 },
                 1,
-                sprite
+                sprite,
+                new Color(Color.Red, 1.0f)
             );
             
             _blockData.Add(lineBlock);
@@ -138,7 +145,7 @@ namespace MonoTetris2
             ActiveBlock randomBlock = _blockData[num];
             int orig = randomBlock.GetOrig();
             List<Vector2> positions = new List<Vector2>(randomBlock.GetPos());
-            ActiveBlock newBlock = new ActiveBlock(positions, orig, randomBlock.GetSprite());
+            ActiveBlock newBlock = new ActiveBlock(positions, orig, randomBlock.GetSprite(), randomBlock.GetColor());
             return newBlock;
         }
 
@@ -190,10 +197,10 @@ namespace MonoTetris2
                 foreach (Vector2 pos in _blockController.GetPos())
                 {
                     int idx = (int) (pos.Y / sprite.Height);
-                    grid[idx].Add(new Block(pos: pos, sprite: sprite, spriteBatch: spriteBatch));
+                    grid[idx].Add(new Block(pos: pos, sprite: sprite, spriteBatch: spriteBatch, color: _blockController.GetColor()));
                 }
                 ClearLines();
-                _blockController = new BlockController(sprite, GetRandomBlock());
+                _blockController.SetNewBlock(GetRandomBlock());
             }
 
             base.Update(gameTime);
