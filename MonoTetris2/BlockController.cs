@@ -14,11 +14,14 @@ namespace Game1
     public class BlockController
     {
         private bool _active = true;
-        private int _count = 0;
-        private const float CountDuration = 1.0f;
-        private float _countDuration = CountDuration;
+        private int _count;
+        private const int FallSpeed = 1;
+        private int _fallSpeed;
+        static public float TotalCountDuration = 1.0f;
+        static public float CurrentCountDuration = TotalCountDuration;
+        private float _countDuration = CurrentCountDuration;
         private float _currentTime;
-        private bool _keyHasBeenPressed = false;
+        private bool _keyHasBeenPressed;
 
         private Texture2D sprite;
         private ActiveBlock _currentBlockPattern;
@@ -26,17 +29,23 @@ namespace Game1
         // There needs to be a singular static grid to check things on.
         public BlockController(Texture2D sprite, ActiveBlock currentBlockPattern)
         {
-            //_grid = grid;
             this.sprite = sprite;
             _count = 0;
             _currentBlockPattern = currentBlockPattern;
         }
         
-        public void SetNewBlock(ActiveBlock newBlock)
+        public bool SetNewBlock(ActiveBlock newBlock)
         {
+            foreach (var ele in newBlock.GetPos())
+            {
+                if (IsValidMove(ele)) continue;
+                return false;
+            }
+            
             _currentBlockPattern = newBlock;
             _count = 0;
             _active = true;
+            return true;
         }
 
         public List<Vector2> GetPos()
@@ -49,13 +58,19 @@ namespace Game1
             return _currentBlockPattern.GetColor();
         }
 
-        private bool IsValidMove(Vector2 toCheck, Rectangle windowBounds)
+        private bool IsValidMove(Vector2 toCheck)
         {
-            if (toCheck.X >= windowBounds.Right || toCheck.X < windowBounds.Left 
-                                                || toCheck.Y + sprite.Height > windowBounds.Bottom)
+            if (toCheck.X >= MonoTetris2.Game1.WindowBounds.Right || toCheck.X < MonoTetris2.Game1.WindowBounds.Left 
+                                                || toCheck.Y + sprite.Height > MonoTetris2.Game1.WindowBounds.Bottom)
                 return false;
             foreach (List<Block> list in MonoTetris2.Game1.grid)
             {
+                if (list.Count > 0)
+                {
+                    // If the block isn't in the same row then don't bother checking it
+                    if ((int)list[0].GetPos().Y != (int)toCheck.Y)
+                        continue;
+                }
                 foreach (Block blk in list)
                 {
                     if (toCheck == blk.GetPos())
@@ -67,16 +82,13 @@ namespace Game1
             return true;
 
         }
-        // Updates all blocks with the new position
-        public void Move(Vector2 toMove, Rectangle windowBounds)
+        public void Move(Vector2 toMove)
         {
             foreach (var ele in _currentBlockPattern.GetPos())
             {
-                if (!IsValidMove(ele + toMove, windowBounds))
-                {
-                    if (!(_currentTime < _countDuration)) _count++;
-                    return;
-                }
+                if (IsValidMove(ele + toMove)) continue;
+                if (!(_currentTime < _countDuration)) _count++;
+                return;
             }
             _count = 0;
             for(int i = 0; i < _currentBlockPattern.GetPos().Count; i++)
@@ -84,25 +96,50 @@ namespace Game1
                 _currentBlockPattern.GetPos()[i] += toMove;
             }
         }
+
         // Draws the active block
-        // Could replace this by having the _blockData store Blocks not Vector2
         public void Draw(SpriteBatch spriteBatch, Texture2D sprite)
         {
             _currentBlockPattern.Draw(spriteBatch, sprite);
         }
-        public void Update(GameTime gameTime, Rectangle windowBounds)
+        public void Update(GameTime gameTime)
         {
-            _countDuration = Keyboard.GetState().IsKeyDown(Keys.Down) ? CountDuration / 6 : CountDuration;
-            
-                
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                if (!_keyHasBeenPressed)
+                {
+                    _keyHasBeenPressed = true;
+                    _currentTime = 0;
+                }
+
+                _fallSpeed = 6;
+            }
+            else
+            {
+                _countDuration = CurrentCountDuration;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.X))
+            {
+                if (!_keyHasBeenPressed)
+                {
+                    _keyHasBeenPressed = true;
+                    _currentTime = 0;
+                }
+
+                _fallSpeed = 200;
+            }
+            else
+            {
+                _countDuration = CurrentCountDuration;
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && !_keyHasBeenPressed)
             {
-                Move(new Vector2(sprite.Width, 0), windowBounds);
+                Move(new Vector2(sprite.Width, 0));
                 _keyHasBeenPressed = true;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && !_keyHasBeenPressed)
             {
-                Move(new Vector2(-sprite.Width, 0), windowBounds);
+                Move(new Vector2(-sprite.Width, 0));
                 _keyHasBeenPressed = true;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Up) && !_keyHasBeenPressed)
@@ -118,12 +155,14 @@ namespace Game1
                     new Vector2(-sprite.Width * 2, 0)
                 };
 
+                // Tries rotating the block in place and if not possible tries one place to the left, to the right
+                // etc (the kickbacks list) until it finds a valid place or not.
                 foreach (Vector2 kickback in kickbacks)
                 {
                     List<Vector2> validRotation = new List<Vector2>();
                     foreach (Vector2 rotation in rotations)
                     {
-                        if (IsValidMove(rotation + kickback, windowBounds))
+                        if (IsValidMove(rotation + kickback))
                         {
                             validRotation.Add(rotation + kickback);
                         }
@@ -142,15 +181,18 @@ namespace Game1
                 }
             }
 
-            if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right) && Keyboard.GetState().IsKeyUp(Keys.Up))
+            if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right) 
+               && Keyboard.GetState().IsKeyUp(Keys.Up) && Keyboard.GetState().IsKeyUp(Keys.Down)
+               && Keyboard.GetState().IsKeyUp(Keys.X))
             {
                 _keyHasBeenPressed = false;
+                _fallSpeed = FallSpeed;
             }
-                
+            _countDuration = CurrentCountDuration / _fallSpeed;
             _currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds; //Time passed since last Update() 
             if (!(_currentTime > _countDuration)) return;
             
-            Move(new Vector2(0f, sprite.Height), windowBounds);
+            Move(new Vector2(0f, sprite.Height));
             _active = _count < 2;
             _currentTime -= _countDuration;
         }

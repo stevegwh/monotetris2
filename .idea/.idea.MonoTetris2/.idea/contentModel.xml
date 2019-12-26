@@ -7,17 +7,21 @@
       <e p="MonoTetris2" t="IncludeRecursive">
         <e p="ActiveBlock.cs" t="Include" />
         <e p="BlockController.cs" t="Include" />
+        <e p="BlockI.cs" t="Include" />
         <e p="Content" t="Include">
           <e p="Content.mgcb" t="Include" />
           <e p="bin" t="Include">
             <e p="DesktopGL" t="Include">
               <e p="Content" t="Include">
                 <e p="block.xnb" t="Include" />
+                <e p="gametext.xnb" t="Include" />
               </e>
               <e p="block.xnb" t="Include" />
+              <e p="gametext.xnb" t="Include" />
             </e>
           </e>
           <e p="block.png" t="Include" />
+          <e p="gametext.spritefont" t="Include" />
           <e p="obj" t="Include">
             <e p="DesktopGL" t="Include">
               <e p=".mgcontent" t="Include" />
@@ -25,8 +29,10 @@
               <e p="Content" t="Include">
                 <e p=".mgcontent" t="Include" />
                 <e p="block.mgcontent" t="Include" />
+                <e p="gametext.mgcontent" t="Include" />
               </e>
               <e p="block.mgcontent" t="Include" />
+              <e p="gametext.mgcontent" t="Include" />
             </e>
           </e>
         </e>

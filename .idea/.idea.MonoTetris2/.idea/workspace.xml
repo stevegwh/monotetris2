@@ -1,46 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bc86abde-65eb-48cb-87c8-425277dd6b57" name="Default Changelist" comment="Everything works">
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/bin/DesktopGL/block.xnb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgcontent" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgstats" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/block.mgcontent" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.12208.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.12432.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.14922.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.16099.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.16251.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.17551.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.19189.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.19387.1.blob" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.19581.1.blob" afterDir="false" />
+    <list default="true" id="bc86abde-65eb-48cb-87c8-425277dd6b57" name="Default Changelist" comment="Added colors, wallkicks and refactored">
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/BlockI.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/bin/DesktopGL/Content/gametext.xnb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/bin/DesktopGL/gametext.xnb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/gametext.spritefont" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/Content/gametext.mgcontent" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/gametext.mgcontent" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/Content/gametext.xnb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.1451.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.16226.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.16480.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.17132.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.17391.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.20727.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.20936.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.2142.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.21848.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.22785.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.23749.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.24615.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.2561.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.25705.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.2687.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.2773.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.31490.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.31660.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.31810.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.31945.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.32063.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.32078.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3231.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.32335.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3372.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3497.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3598.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3666.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.3759.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.4030.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.450.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.5878.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.6363.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.6767.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.6985.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.7259.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.732.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.7522.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.7715.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.7876.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.8136.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.8670.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.8878.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.9206.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.924.1.blob" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/mono_crash.mem.9557.1.blob" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MonoTetris2/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MonoTetris2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MonoTetris2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MonoTetris2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MonoTetris2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/ActiveBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/ActiveBlock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/GridBlock.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/BlockController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/BlockController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/bin/DesktopGL/Content/block.xnb" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/bin/DesktopGL/Content/block.xnb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/block.png" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/block.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/Content.mgcb" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/Content.mgcb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgcontent" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgcontent" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgstats" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/.mgstats" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/Content/.mgcontent" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/Content/.mgcontent" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/Content/block.mgcontent" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/Content/block.mgcontent" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/block.mgcontent" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Content/obj/DesktopGL/block.mgcontent" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/Game1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/Game1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/Content/block.xnb" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/Content/block.xnb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/bin/Debug/netcoreapp2.0/MonoTetris2.runtimeconfig.dev.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/MonoTetris2.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MonoTetris2/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MonoTetris2/obj/project.packagespec.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +86,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9983402-2CF8-45EF-8679-CD8D8CA3CF26/75/5ff84814/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MonoTetris2/Game1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MonoTetris2/BlockController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/278D7C4E-E8D0-44FE-B0B2-1F214107358B/0b/4432ad5f/ContentManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MonoTetris2/BlockI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MonoTetris2/GridBlock.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -64,10 +96,12 @@
         <option value="$PROJECT_DIR$/MonoTetris2/Grid.cs" />
         <option value="$PROJECT_DIR$/MonoTetris2/Block.cs" />
         <option value="$PROJECT_DIR$/MonoTetris2/RotationController.cs" />
+        <option value="$PROJECT_DIR$/MonoTetris2/GridBlock.cs" />
+        <option value="$PROJECT_DIR$/MonoTetris2/IBlock.cs" />
+        <option value="$PROJECT_DIR$/MonoTetris2/BlockI.cs" />
+        <option value="$PROJECT_DIR$/MonoTetris2/ActiveBlock.cs" />
         <option value="$PROJECT_DIR$/MonoTetris2/Game1.cs" />
         <option value="$PROJECT_DIR$/MonoTetris2/BlockController.cs" />
-        <option value="$PROJECT_DIR$/MonoTetris2/GridBlock.cs" />
-        <option value="$PROJECT_DIR$/MonoTetris2/ActiveBlock.cs" />
       </list>
     </option>
   </component>
@@ -135,6 +169,8 @@
       <workItem from="1576883880196" duration="3160000" />
       <workItem from="1576927088104" duration="3156000" />
       <workItem from="1577017110409" duration="17855000" />
+      <workItem from="1577208409565" duration="1967000" />
+      <workItem from="1577358717230" duration="14813000" />
     </task>
     <task id="LOCAL-00001" summary="second commit">
       <created>1576851556943</created>
@@ -223,106 +259,106 @@
     <option name="LAST_COMMIT_MESSAGE" value="Everything works" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1874" height="114" key="GridCell.Tab.0.bottom" timestamp="1577133312031">
+    <state width="1874" height="114" key="GridCell.Tab.0.bottom" timestamp="1577391700918">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.0.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804148" />
-    <state width="1874" height="114" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577133312031" />
-    <state width="1874" height="114" key="GridCell.Tab.0.center" timestamp="1577133312030">
+    <state width="1874" height="114" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700918" />
+    <state width="1874" height="114" key="GridCell.Tab.0.center" timestamp="1577391700918">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.0.center/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804148" />
-    <state width="1874" height="114" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577133312030" />
-    <state width="1874" height="114" key="GridCell.Tab.0.left" timestamp="1577133312030">
+    <state width="1874" height="114" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700918" />
+    <state width="1874" height="114" key="GridCell.Tab.0.left" timestamp="1577391700918">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.0.left/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804148" />
-    <state width="1874" height="114" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577133312030" />
-    <state width="1874" height="114" key="GridCell.Tab.0.right" timestamp="1577133312030">
+    <state width="1874" height="114" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700918" />
+    <state width="1874" height="114" key="GridCell.Tab.0.right" timestamp="1577391700918">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.0.right/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804148" />
-    <state width="1874" height="114" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577133312030" />
-    <state width="1874" height="114" key="GridCell.Tab.1.bottom" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700918" />
+    <state width="1874" height="114" key="GridCell.Tab.1.bottom" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.1.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.1.center" timestamp="1577133311891">
+    <state width="1874" height="114" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.1.center" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.1.center/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804079" />
-    <state width="1874" height="114" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311891" />
-    <state width="1874" height="114" key="GridCell.Tab.1.left" timestamp="1577133311891">
+    <state width="1874" height="114" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.1.left" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.1.left/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804079" />
-    <state width="1874" height="114" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311891" />
-    <state width="1874" height="114" key="GridCell.Tab.1.right" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.1.right" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.1.right/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804079" />
-    <state width="1874" height="114" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.2.bottom" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.2.bottom" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.2.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.2.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.2.center" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.2.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.2.center" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.2.center/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.2.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.2.left" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.2.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.2.left" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.2.left/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.2.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.2.right" timestamp="1577133311892">
+    <state width="1874" height="114" key="GridCell.Tab.2.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.2.right" timestamp="1577391700804">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.2.right/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.2.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311892" />
-    <state width="1874" height="114" key="GridCell.Tab.3.bottom" timestamp="1577133311893">
+    <state width="1874" height="114" key="GridCell.Tab.2.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700804" />
+    <state width="1874" height="114" key="GridCell.Tab.3.bottom" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.3.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.3.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311893" />
-    <state width="1874" height="114" key="GridCell.Tab.3.center" timestamp="1577133311893">
+    <state width="1874" height="114" key="GridCell.Tab.3.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.3.center" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.3.center/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.3.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311893" />
-    <state width="1874" height="114" key="GridCell.Tab.3.left" timestamp="1577133311893">
+    <state width="1874" height="114" key="GridCell.Tab.3.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.3.left" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.3.left/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.3.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311893" />
-    <state width="1874" height="114" key="GridCell.Tab.3.right" timestamp="1577133311893">
+    <state width="1874" height="114" key="GridCell.Tab.3.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.3.right" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.3.right/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.3.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311893" />
-    <state width="1874" height="114" key="GridCell.Tab.4.bottom" timestamp="1577133311894">
+    <state width="1874" height="114" key="GridCell.Tab.3.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.4.bottom" timestamp="1577391700806">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.4.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.4.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311894" />
-    <state width="1874" height="114" key="GridCell.Tab.4.center" timestamp="1577133311894">
+    <state width="1874" height="114" key="GridCell.Tab.4.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700806" />
+    <state width="1874" height="114" key="GridCell.Tab.4.center" timestamp="1577391700806">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.4.center/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.4.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311894" />
-    <state width="1874" height="114" key="GridCell.Tab.4.left" timestamp="1577133311893">
+    <state width="1874" height="114" key="GridCell.Tab.4.center/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700806" />
+    <state width="1874" height="114" key="GridCell.Tab.4.left" timestamp="1577391700805">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.4.left/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.4.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311893" />
-    <state width="1874" height="114" key="GridCell.Tab.4.right" timestamp="1577133311894">
+    <state width="1874" height="114" key="GridCell.Tab.4.left/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700805" />
+    <state width="1874" height="114" key="GridCell.Tab.4.right" timestamp="1577391700806">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state width="1815" height="268" key="GridCell.Tab.4.right/0.0.1858.1080@0.0.1858.1080" timestamp="1577115804080" />
-    <state width="1874" height="114" key="GridCell.Tab.4.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577133311894" />
+    <state width="1874" height="114" key="GridCell.Tab.4.right/0.24.1920.1056@0.24.1920.1056" timestamp="1577391700806" />
     <state x="560" y="287" key="Rider.ProjectTemplateDialog.Size" timestamp="1576851011850">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -337,19 +373,19 @@
     </state>
     <state x="521" y="270" key="Vcs.Push.Dialog.v2/0.0.1858.1080@0.0.1858.1080" timestamp="1576851558401" />
     <state x="538" y="288" width="800" height="535" key="Vcs.Push.Dialog.v2/0.24.1920.1056@0.24.1920.1056" timestamp="1577017266729" />
-    <state x="590" y="230" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577115530417">
-      <screen x="0" y="0" width="1858" height="1080" />
+    <state x="610" y="249" width="748" height="660" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1577365173673">
+      <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="590" y="230" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1858.1080@0.0.1858.1080" timestamp="1577115530417" />
-    <state x="610" y="249" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1577059909330" />
+    <state x="610" y="249" width="748" height="660" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1577365173673" />
     <state x="624" y="260" key="run.anything.popup" timestamp="1576863270611">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="624" y="260" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1576863270611" />
-    <state x="612" y="254" width="695" height="663" key="search.everywhere.popup" timestamp="1577019069995">
+    <state x="612" y="254" width="695" height="663" key="search.everywhere.popup" timestamp="1577367488057">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="592" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1858.1080@0.0.1858.1080" timestamp="1576944671891" />
-    <state x="612" y="254" width="695" height="663" key="search.everywhere.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1577019069995" />
+    <state x="612" y="254" width="695" height="663" key="search.everywhere.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1577367488057" />
   </component>
 </project>

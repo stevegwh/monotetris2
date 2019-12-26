@@ -25,3 +25,10 @@
 /processorParam:TextureFormat=Color
 /build:block.png
 
+#begin gametext.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:gametext.spritefont
+

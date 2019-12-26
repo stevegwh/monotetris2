@@ -20,3 +20,4 @@ C:/Users/Steve/RiderProjects/monotetris2/MonoTetris2/obj/Debug/netcoreapp2.0/Mon
 C:/Users/Steve/RiderProjects/monotetris2/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.AssemblyInfo.cs
 C:/Users/Steve/RiderProjects/monotetris2/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.dll
 C:/Users/Steve/RiderProjects/monotetris2/MonoTetris2/obj/Debug/netcoreapp2.0/MonoTetris2.pdb
+/home/forest/RiderProjects/MonoTetris2/MonoTetris2/bin/Debug/netcoreapp2.0/Content/gametext.xnb

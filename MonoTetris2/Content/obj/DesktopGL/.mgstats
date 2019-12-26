@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/block.png","/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/bin/DesktopGL/block.xnb","TextureProcessor","Texture2DContent",1617,9301,0.177352
+"/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/block.png","/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/bin/DesktopGL/block.xnb","TextureProcessor","Texture2DContent",1617,9301,0.139143
+"/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/gametext.spritefont","/home/forest/RiderProjects/MonoTetris2/MonoTetris2/Content/bin/DesktopGL/gametext.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21521,0.162204

@@ -9,15 +9,15 @@ namespace MonoTetris2
 {
     public class ActiveBlock
     {
-        private List<Vector2> _positions;
+        protected List<Vector2> Positions;
         // The index of the point of origin in the array
-        private int _origin;
-        private Texture2D _sprite;
+        protected int _origin;
+        protected Texture2D _sprite;
         private Color _color;
 
         public List<Vector2> GetPos()
         {
-            return _positions;
+            return Positions;
         }
         
         public Texture2D GetSprite()
@@ -37,10 +37,10 @@ namespace MonoTetris2
 
         // Returns the block after it has been rotated. BlockController will check if this is a valid move
         // and if so it will then call "SetPos"
-        public List<Vector2> Rotate()
+        virtual public List<Vector2> Rotate()
         {
             // -1 is a flag to not rotate, square uses this.
-            if (_origin == -1) return _positions;
+            if (_origin == -1) return Positions;
             List<Vector2> normalizedPositions = Normalize();
             Vector2 center = normalizedPositions[_origin];
             List<Vector2> toReturn = new List<Vector2>();
@@ -55,10 +55,10 @@ namespace MonoTetris2
         }
 
         // Changes exact screen position to grid numbers e.g. 1, 3 
-        private List<Vector2> Normalize()
+        protected List<Vector2> Normalize()
         {
             List<Vector2> toReturn = new List<Vector2>();
-            foreach (Vector2 vec in _positions)
+            foreach (Vector2 vec in Positions)
             {
                 toReturn.Add(new Vector2(vec.X / _sprite.Width, vec.Y / _sprite.Height));
             }
@@ -68,13 +68,13 @@ namespace MonoTetris2
 
         public void SetPos(List<Vector2> newPos)
         {
-            _positions = newPos;
+            Positions = newPos;
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D sprite)
         {
             spriteBatch.Begin();
-            foreach (Vector2 vec in _positions)
+            foreach (Vector2 vec in Positions)
             {
                 spriteBatch.Draw(sprite, vec, _color);
             }
@@ -84,7 +84,7 @@ namespace MonoTetris2
         public ActiveBlock(List<Vector2> positions, int origin, Texture2D sprite, Color color)
         {
             _origin = origin;
-            _positions = positions;
+            Positions = positions;
             _sprite = sprite;
             _color = color;
         }
