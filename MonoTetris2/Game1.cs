@@ -14,13 +14,16 @@ namespace MonoTetris2
         private bool _gameOver;
         GraphicsDeviceManager graphics;
         static public Rectangle WindowBounds;
+        private Rectangle _panelBounds;
         SpriteBatch spriteBatch;
         private int _level;
         private int _lines;
         private int _score;
         private Texture2D _sprite;
+        private Texture2D _border;
         private SpriteFont _gameText;
         private List<ActiveBlock> _blockData = new List<ActiveBlock>();
+        private List<ActiveBlock> _randomBlockBag = new List<ActiveBlock>();
         private BlockController _blockController;
         static public List<List<Block>> grid = new List<List<Block>>();
 
@@ -30,13 +33,12 @@ namespace MonoTetris2
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferHeight = 48 * 20;
-            graphics.PreferredBackBufferWidth = 48 * 10;
+            graphics.PreferredBackBufferHeight = (48 * 20);
+            graphics.PreferredBackBufferWidth = (48 * 15);
         }
 
         protected override void Initialize()
         {
-            WindowBounds = graphics.GraphicsDevice.Viewport.Bounds;
             base.Initialize();
         }
         
@@ -45,6 +47,13 @@ namespace MonoTetris2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _sprite = Content.Load<Texture2D>("block");
+            _border = Content.Load<Texture2D>("border");
+            var win = graphics.GraphicsDevice.Viewport.Bounds;
+            int offset = 12;
+            WindowBounds = new Rectangle(win.Left, win.Top, (48 * 10), (48 * 20));
+            _panelBounds = new Rectangle(WindowBounds.Right, WindowBounds.Top, 
+                win.Width - WindowBounds.Width, win.Height - WindowBounds.Height);
+            
             _gameText = Content.Load<SpriteFont>("gametext");
             BlockI lineBlock = new BlockI(
                 new List<Vector2> {
@@ -137,31 +146,44 @@ namespace MonoTetris2
             _blockData.Add(sBlockL);
             _blockData.Add(sBlockR);
             _blockData.Add(tBlock);
+            
 
+            GenerateRandomBag();
             _blockController = new BlockController(_sprite, GetRandomBlock());
             InitGrid();
+        }
+
+        void GenerateRandomBag()
+        {
+            foreach (var blk in _blockData)
+            {
+                _randomBlockBag.Add(blk);
+            }
         }
         
         // Must return by value
         private ActiveBlock GetRandomBlock()
         {
+            if (_randomBlockBag.Count <= 0) GenerateRandomBag();
             Random random = new Random();  
-            int num = random.Next(_blockData.Count);
-            int orig = _blockData[num].GetOrig();
-            List<Vector2> positions = new List<Vector2>(_blockData[num].GetPos());
-            if (_blockData[num] is BlockI)
+            int num = random.Next(_randomBlockBag.Count);
+            var blk = _randomBlockBag[num];
+            int orig = blk.GetOrig();
+            List<Vector2> positions = new List<Vector2>(blk.GetPos());
+            _randomBlockBag.RemoveAt(num);
+            if (blk is BlockI)
             {
-                return new BlockI(positions, orig, _blockData[num].GetSprite(), _blockData[num].GetColor());
+                return new BlockI(positions, orig, blk.GetSprite(), blk.GetColor());
             }
             else
             {
-                return new ActiveBlock(positions, orig, _blockData[num].GetSprite(), _blockData[num].GetColor());
+                return new ActiveBlock(positions, orig, blk.GetSprite(), blk.GetColor());
             }
         }
 
         private void InitGrid()
         {
-            for (int i = 0; i < WindowBounds.Bottom/_sprite.Height; i++)
+            for (int i = 0; i < WindowBounds.Height/_sprite.Height; i++)
             {
                 grid.Add(new List<Block>());
             }
@@ -255,6 +277,9 @@ namespace MonoTetris2
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
+            //spriteBatch.Draw(_border, new Vector2(0, 0));
+            spriteBatch.End();
 
             _blockController.Draw(spriteBatch, _sprite);
             foreach (List<Block> ele in grid)
@@ -265,9 +290,12 @@ namespace MonoTetris2
                 }
             }
             spriteBatch.Begin();
-            spriteBatch.DrawString(_gameText, "Score: " + _score.ToString(), new Vector2(WindowBounds.Left, 10), Color.White);
-            spriteBatch.DrawString(_gameText, "Level " + _level.ToString(), new Vector2((float)WindowBounds.Right / 2, 10), Color.White);
-            spriteBatch.DrawString(_gameText, "Lines: " + _lines.ToString(), new Vector2(WindowBounds.Right - 100, 10), Color.White);
+            spriteBatch.DrawString(_gameText, "Score: " + _score, 
+                new Vector2(_panelBounds.Left + (float)_panelBounds.Width / 2, 48 * 3), Color.White);
+            spriteBatch.DrawString(_gameText, "Level " + _level, 
+                new Vector2(_panelBounds.Left + (float)_panelBounds.Width / 2, 48 * 4), Color.White);
+            spriteBatch.DrawString(_gameText, "Lines: " + _lines, 
+                new Vector2(_panelBounds.Left +(float)_panelBounds.Width / 2, 48 * 5), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
