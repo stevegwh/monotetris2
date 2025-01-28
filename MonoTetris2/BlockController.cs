@@ -6,32 +6,37 @@ using MonoTetris2;
 
 namespace Game1
 {
-   // TODO: Make this intantiate once and just change what block is the current one. 
+   // TODO: Make this initiate once and just change what block is the current one. 
     public class BlockController
     {
         private bool _dropResetNeeded;
         private bool _rotateKeyDown;
         private bool _moveKeyDown;
-        
         private bool _moving = true;
         private int _blockStickTimer; // Time until a block 'sticks' after reaching a destination
         private const int BLOCK_STICK_THRESHOLD = 2;
-        private const int FALL_SPEED = 1;
-        private int _fallSpeed;
         private const float FALL_TIME_THRESHOLD = 1.0f;
+        private float _baseFallSpeed = 1.0f;
+        private float _fallSpeed;
         private const float MOVE_TIME_THRESHOLD = 0.15f;
         private float _fallTimer;
         private float _moveTimer;
-
         private Texture2D _sprite;
         private ActiveBlock _currentBlockPattern;
 
-        // There needs to be a singular static grid to check things on.
-        public BlockController(Texture2D sprite, ActiveBlock currentBlockPattern)
+        public float GetFallTimeThreshold()
         {
-            _sprite = sprite;
-            _blockStickTimer = 0;
-            _currentBlockPattern = currentBlockPattern;
+            return FALL_TIME_THRESHOLD;
+        }
+
+        public void SetBaseFallSpeed(float speed)
+        {
+            _baseFallSpeed = speed;
+        }
+        
+        public float GetBaseFallSpeed()
+        {
+            return _baseFallSpeed;
         }
         
         public bool SetNewBlock(ActiveBlock newBlock)
@@ -108,6 +113,54 @@ namespace Game1
                 _currentBlockPattern.GetPos()[i] += toMove;
             }
         }
+        
+        
+        private void HandleKeyPress(int fallSpeed)
+        {
+            _fallSpeed = fallSpeed;
+        }
+
+        private void TryRotateBlock()
+        {
+            var rotations = _currentBlockPattern.Rotate();
+            var kickbacks = new List<Vector2>
+            {
+                new (0, 0),
+                new (0, -_sprite.Height),
+                new (_sprite.Width, 0),
+                new (-_sprite.Width, 0),
+                new (_sprite.Width * 2, 0),
+                new (-_sprite.Width * 2, 0)
+            };
+
+            foreach (var kickback in kickbacks)
+            {
+                var validRotation = new List<Vector2>();
+
+                foreach (var rotation in rotations)
+                {
+                    if (IsValidMove(rotation + kickback))
+                    {
+                        validRotation.Add(rotation + kickback);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (validRotation.Count == 4)
+                {
+                    _currentBlockPattern.SetPos(validRotation);
+                    return;
+                }
+            }
+        }
+
+        public bool IsActive()
+        {
+            return _moving;
+        }
 
         // Draws the active block
         public void Draw(SpriteBatch spriteBatch, Texture2D sprite)
@@ -169,65 +222,25 @@ namespace Game1
             
             if (!fallKeyPressed)
             {
-                _fallSpeed = FALL_SPEED;
+                _fallSpeed = _baseFallSpeed;
             }
             
             _fallTimer += (float)gameTime.ElapsedGameTime.TotalSeconds * _fallSpeed;
 
             if (_fallTimer < FALL_TIME_THRESHOLD) return;
-            _fallSpeed = FALL_SPEED;
+            _fallSpeed = _baseFallSpeed;
             Drop(new Vector2(0f, _sprite.Height));
             _moving = _blockStickTimer < BLOCK_STICK_THRESHOLD;
             _fallTimer = 0;
             // Reset key input here
         }
-
-        private void HandleKeyPress(int fallSpeed)
+        
+        // There needs to be a singular static grid to check things on.
+        public BlockController(Texture2D sprite, ActiveBlock currentBlockPattern)
         {
-            _fallSpeed = fallSpeed;
-        }
-
-        private void TryRotateBlock()
-        {
-            var rotations = _currentBlockPattern.Rotate();
-            var kickbacks = new List<Vector2>
-            {
-                new (0, 0),
-                new (0, -_sprite.Height),
-                new (_sprite.Width, 0),
-                new (-_sprite.Width, 0),
-                new (_sprite.Width * 2, 0),
-                new (-_sprite.Width * 2, 0)
-            };
-
-            foreach (var kickback in kickbacks)
-            {
-                var validRotation = new List<Vector2>();
-
-                foreach (var rotation in rotations)
-                {
-                    if (IsValidMove(rotation + kickback))
-                    {
-                        validRotation.Add(rotation + kickback);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                if (validRotation.Count == 4)
-                {
-                    _currentBlockPattern.SetPos(validRotation);
-                    return;
-                }
-            }
-        }
-
-
-        public bool IsActive()
-        {
-            return _moving;
+            _sprite = sprite;
+            _blockStickTimer = 0;
+            _currentBlockPattern = currentBlockPattern;
         }
     }
 }

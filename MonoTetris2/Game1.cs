@@ -236,11 +236,9 @@ namespace MonoTetris2
                 _score += 40 * (_level + 1);
             }
 
+            var oldLevel = _level;
             _level = _lines > 10 ? _lines / 10 : 0;
-            // if (BlockController.CurrentCountDuration - 0.1f > 0f)
-            // {
-            //     BlockController.CurrentCountDuration = BlockController.FALL_TIME_THRESHOLD - _level / 10;
-            // }
+            if (oldLevel < _level) _blockController.SetBaseFallSpeed(_blockController.GetBaseFallSpeed() + 1.0f);
         }
 
         protected override void Update(GameTime gameTime)
@@ -278,7 +276,7 @@ namespace MonoTetris2
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            //spriteBatch.Draw(_border, new Vector2(0, 0));
+            spriteBatch.Draw(_border, new Vector2(0, 0));
             spriteBatch.End();
 
             _blockController.Draw(spriteBatch, _sprite);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,8 +23,8 @@ namespace MonoTetris2
                 }
                 else
                 {
-                    x2 = (normalizedPosition.Y + center.X - center.Y);
-                    y2 = (center.X + center.Y - normalizedPosition.X);
+                    x2 = normalizedPosition.Y + center.X - center.Y;
+                    y2 = center.X + center.Y - normalizedPosition.X;
                     
                 }
                 
